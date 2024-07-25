@@ -1,7 +1,7 @@
 class Rover {
    constructor(position){
       this.position = position;
-      this.MODE = "NORMAL";
+      this.mode = "NORMAL";
       this.generatorWatts = 110;
    }
 
@@ -13,14 +13,10 @@ class Rover {
          const element = message.commands[index];
          const res = {};
          if(element.commandType === "MODE_CHANGE"){
-            if(this.MODE === "LOW_POWER"){
-               res.completed= false;
-            }else {
             res.completed= true;
-            this.MODE = element.value;
-            }
+            this.mode = element.value;
          } else if (element.commandType === "MOVE"){
-            if(this.MODE === "LOW_POWER"){
+            if(this.mode === "LOW_POWER"){
                res.completed= false;
             }else {
             this.position = element.value;
